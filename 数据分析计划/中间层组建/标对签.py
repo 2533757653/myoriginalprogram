@@ -1,0 +1,25 @@
+#decoding=gbk
+
+from shujukuall import shujukuerfanbiao,shujukuerji 
+
+b=shujukuerji()
+data=list(b.chazhaoall())
+finaldata=[]
+for i in data:
+    i=dict(i)
+    fan=i['·¬ºÅ']
+    biao=i['±êÇ©']
+    for q,shu in zip(finaldata,range(len(finaldata))):
+        if fan==q['·¬ºÅ']:
+            finaldata[shu]['±êÇ©'].append({biao:i['ÊýÁ¿']})
+            break
+    else:
+        finaldata.append({'·¬ºÅ':fan,'±êÇ©':[{biao:i['ÊýÁ¿']}]})
+def xuanze(i):
+    return list(i.values())[0]
+
+for q in finaldata:
+    q['±êÇ©']=sorted(q['±êÇ©'],key=xuanze)
+
+a=shujukuerfanbiao(finaldata)
+a.xierumany()
